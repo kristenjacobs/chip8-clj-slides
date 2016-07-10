@@ -2,31 +2,40 @@
 .. image:: title-page.png
    :height: 600px
 
-Chip-8
-------
+What's Chip-8?
+--------------
+
+TODO
 
 * 8-bit games virtual machine 
+  TODO: Add a bit of history 
 
 * Demo (so you know where we are heading....)
 
 * Talk outline
 
-  * TODO
+  * Quick overview of the chip8 architecture
 
-  * TODO
+  * Dive into the clojure implementation
 
 Why did I do this?
 ------------------
 
-rst2pdf can display code nicely:
+TODO
 
-.. code-block:: python
+- Learn a bit more clojure
+  (so I dont have to look up the syntax every time ...)
 
-    for x in range(7):
-        print "cute!"
+- Really good project for a number of reasons:
 
-Chip-8 Details
---------------
+  - Pretty small (which gives me a fighting chance of finishing..)
+  - Once complete (or semi-complete) you gets lots of reward
+    as there already exists lots of games.  
+
+- Learn a little more about chip arhitecture/emulators.
+
+Chip-8 Architecture
+-------------------
 
 TODO
 
@@ -38,40 +47,51 @@ TODO
 - timers + sound
 - memory map/font data  
 
-Architecture
-------------
-
-Core loop
-Decoder
-Instructions
-Machine state
-
-Architecture (cont)
--------------------
-
-State sharing.
-
-Graphics
---------
-  - Started off using ??? (wrapper for swing).
-  - Became annoying for reasn ??
-  - Moved to using the lib ???
-  - Nice and Simple!    
-  - Demo(?)
-
-Timers/Sound
-------------
-
-Timer: explain state sharing scheme used.
-
-Emulator development process algorithnm
----------------------------------------
+General emulator development process algorithnm
+-----------------------------------------------
 
   10: Write the decoder (based on wikipedia entry)
   20: Generate an empty implementation for each instruction (which prints the opcode and exits)
-  30: Play a game (Arkanoid) until it crashes out on an unimplemented instruction.
-  40: Implement the instruction (+ unit test).
+  30: Play a game of your choosing (Arkanoid in my case) until it crashes out on an unimplemented instruction.
+  40: Implement the instruction (+ associated unit test).
   50: Goto 30.
+
+Implementation (1): Fetch/decode/execute
+----------------------------------------
+
+TODO
+
+  * Tour of the code, including the following
+
+    * Machine state
+    * Core loop
+    * Instruction decoder
+    * Instructions
+
+Implemantaion (2): Threads and shared state
+-------------------------------------------
+
+TODO
+
+Implementation (3): Graphics
+----------------------------
+
+TODO
+
+  * Originally used seesaw (wrapper for swing).
+  * Moved to using the quil animation library. Really simple!    
+  * Demo 
+
+Implementation (4) Sound
+------------------------
+
+TODO
+
+  * Found it remarkably hard to make my linux laptop make a sound!
+  * Tried overtone, which looks great, but still no sound.
+  * Ended up playing wav files using a command line utility
+    (paplay - linux, afplay - osx)
+  * Demo
 
 Testing
 -------
@@ -85,22 +105,24 @@ Testing
 
   - All other components tested manually by playing games
 
+What's next?
+------------
+
+.. image:: jet-set-willy.jpg
+   :height: 550px
+
 Links
 -----
 
-* Source and slides
+* https://github.com/kristenjacobs/chip8-clj
 
-  * https://github.com/kristenjacobs/chip8-clj
+* https://github.com/kristenjacobs/chip8-clj-slides
 
-  * https://github.com/kristenjacobs/chip8-clj-slides
-
-* Chip8 technical details
+* Chip8 details + roms (games and demos)
 
   * https://en.wikipedia.org/wiki/CHIP-8
 
   * http://devernay.free.fr/hacks/chip8/C8TECH10.HTM
-
-* Chip8 roms (games and demos)
 
   * http://www.chip8.com/?page=84
 
