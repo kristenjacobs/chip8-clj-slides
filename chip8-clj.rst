@@ -5,105 +5,131 @@
 What's Chip-8?
 --------------
 
-TODO
+* 1970's 8-bit virtual machine targeted at games programming. 
+  Originally implemented on kit-based 8-bit micros such as the mighty Telmac 1800
+  (2000 units sold mostly in Sweden and Finland)
 
-* 8-bit games virtual machine 
-  TODO: Add a bit of history 
+.. image:: telmac-1800.jpeg
+   :height: 350px
 
-* Demo (so you know where we are heading....)
+The plan
+--------
 
-* Talk outline
+* Quick overview of the Chip8 architecture
 
-  * Quick overview of the chip8 architecture
+* Dive into the Clojure implementation
 
-  * Dive into the clojure implementation
+* But first, a quick demo (so you know where we are heading....)
+
+.. image:: brix.png
+   :height: 300px
 
 Why did I do this?
 ------------------
 
-TODO
+* Mostly to learn a bit more Clojure
+  (so I don't have to look up the syntax of reduce every time ...)
 
-- Learn a bit more clojure
-  (so I dont have to look up the syntax every time ...)
+* Really good project for a number of reasons:
 
-- Really good project for a number of reasons:
+  * Pretty small (which gives me a fighting chance of finishing..)
 
-  - Pretty small (which gives me a fighting chance of finishing..)
-  - Once complete (or semi-complete) you gets lots of reward
-    as there already exists lots of games.  
+  * Once complete (or semi-complete) you gets lots of feedback
+    as there already exists lots of games (Pong, Space Invaders, Pac-man, etc).  
+ 
+  * And it also has the nice side effect of teaching me a little more about
+    8-bits chips and games emulation.
 
-- Learn a little more about chip arhitecture/emulators.
+Chip-8 Architecture (1)
+-----------------------
 
-Chip-8 Architecture
--------------------
+* 4k of memory (interpreter in the lower 512 bytes)
 
-TODO
+* 16 8-bit data registers name V0 to VF
 
-- memory
-- registers
-- pc/stack/etc  
-- instrucitons 
-- graphics
-- timers + sound
-- memory map/font data  
+* 16-bit address register (I) 
+
+* Stack for subroutine return addresses (16 deep)
+
+* 35 (2 byte) instructions
+
+Chip-8 Architecture (2)
+-----------------------
+
+* Monochrome 64 x 32 pixel display
+ 
+* Sound timer. 60 Hz. Counts down and beeps when non-zero
+
+* Delay timer. 60 Hz. Counts down when non-zero
+
+* Hex input keyboard (0x0 - 0xF) 
 
 General emulator development process algorithnm
 -----------------------------------------------
 
-  10: Write the decoder (based on wikipedia entry)
-  20: Generate an empty implementation for each instruction (which prints the opcode and exits)
-  30: Play a game of your choosing (Arkanoid in my case) until it crashes out on an unimplemented instruction.
-  40: Implement the instruction (+ associated unit test).
-  50: Goto 30.
+10: Write the decoder + core fetch/decode/execute loop
+
+20: Generate an empty implementation for each instruction (print the opcode and exit)
+  
+30: Play a game of your choosing until it crashes out on an unimplemented instruction
+  
+40: Implement the offending instruction (+ associated unit test)
+
+50: Goto 30
 
 Implementation (1): Fetch/decode/execute
 ----------------------------------------
 
-TODO
+* Single machine state map represents the entire state of the machine
+  (memory, registers, stack, etc.)
 
-  * Tour of the code, including the following
-
-    * Machine state
-    * Core loop
-    * Instruction decoder
-    * Instructions
+* Core fetch/decode/execute loop takes a machine state, 
+  and returns an updated machine state.
 
 Implemantaion (2): Threads and shared state
 -------------------------------------------
 
-TODO
+* 4 threads
+
+  * Core -- atom[] --> Graphics
+
+  * Core -- atom 0 --> Sound timer
+
+  * Core -- atom 0 --> Delay timer
 
 Implementation (3): Graphics
 ----------------------------
 
-TODO
+* Using the Quil animation library
 
-  * Originally used seesaw (wrapper for swing).
-  * Moved to using the quil animation library. Really simple!    
-  * Demo 
+* All drawing done via single draw sprite instruction
+
+* Demo 
 
 Implementation (4) Sound
 ------------------------
 
-TODO
+* Found it remarkably hard to make my Linux laptop make a sound!
+  
+* Tried overtone, which looks great, but still no sound.
 
-  * Found it remarkably hard to make my linux laptop make a sound!
-  * Tried overtone, which looks great, but still no sound.
-  * Ended up playing wav files using a command line utility
-    (paplay - linux, afplay - osx)
-  * Demo
+* Ended up playing wav files using a command line utility
+  (paplay on Linux, afplay on OSX)
+
+* Demo
 
 Testing
 -------
 
-  - Why did I bother I hear you ask (seeing as this was a personal project)?
-  - Mostly to learn a little more about unit testing in clojure.  
+* Why did I bother (seeing as this was a personal project)?
+  Mostly to learn a little more about unit testing in Clojure.
+  (More specifically, using core.test)  
 
-  - Unit tests for each instruction (testing through the core/decoder).
-    (Nice because the state of the chip can be passed in via the memory state,
-    and you can simply check that it has been updated in the expected way).
+* Unit tests for each instruction (testing through the core/decoder).
+  (Nice because the state of the chip can be passed in via the memory state,
+  and you can simply check that it has been updated in the expected way)
 
-  - All other components tested manually by playing games
+* All other components tested manually by playing games
 
 What's next?
 ------------
