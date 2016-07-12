@@ -40,7 +40,7 @@ Why did I do this?
   * And it also has the nice side effect of teaching me a little more about
     8-bits chips and games emulation.
 
-Chip-8 Architecture (1)
+Chip-8 architecture (1)
 -----------------------
 
 * 4k of memory (interpreter in the lower 512 bytes)
@@ -53,7 +53,7 @@ Chip-8 Architecture (1)
 
 * 35 (2 byte) instructions
 
-Chip-8 Architecture (2)
+Chip-8 architecture (2)
 -----------------------
 
 * Monochrome 64 x 32 pixel display
@@ -64,8 +64,8 @@ Chip-8 Architecture (2)
 
 * Hex input keyboard (0x0 - 0xF) 
 
-General emulator development process algorithnm
------------------------------------------------
+Emulator development algorithnm
+-------------------------------
 
 10: Write the decoder + core fetch/decode/execute loop
 
@@ -77,8 +77,8 @@ General emulator development process algorithnm
 
 50: Goto 30
 
-Implementation (1): Fetch/decode/execute
-----------------------------------------
+Fetch/decode/execute
+--------------------
 
 * Single machine state map represents the entire state of the machine
   (memory, registers, stack, etc.)
@@ -86,8 +86,10 @@ Implementation (1): Fetch/decode/execute
 * Core fetch/decode/execute loop takes a machine state, 
   and returns an updated machine state.
 
-Implemantaion (2): Threads and shared state
--------------------------------------------
+* *Code*
+
+Threads and shared state
+------------------------
 
 * 4 threads
 
@@ -97,17 +99,19 @@ Implemantaion (2): Threads and shared state
 
   * Core -- atom 0 --> Delay timer
 
-Implementation (3): Graphics
-----------------------------
+* *Code*
+
+Graphics
+--------
 
 * Using the Quil animation library
 
 * All drawing done via single draw sprite instruction
 
-* Demo 
+* *Code + Demo* 
 
-Implementation (4) Sound
-------------------------
+Sound
+-----
 
 * Found it remarkably hard to make my Linux laptop make a sound!
   
@@ -116,7 +120,7 @@ Implementation (4) Sound
 * Ended up playing wav files using a command line utility
   (paplay on Linux, afplay on OSX)
 
-* Demo
+* *Code + Demo*
 
 Testing
 -------
