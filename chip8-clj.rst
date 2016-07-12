@@ -2,7 +2,7 @@
 .. image:: title-page.png
    :height: 600px
 
-What's Chip-8?
+What's CHIP-8?
 --------------
 
 * 1970's 8-bit virtual machine targeted at games programming. 
@@ -15,7 +15,7 @@ What's Chip-8?
 The plan
 --------
 
-* Quick overview of the Chip8 architecture
+* Quick overview of the CHIP-8 architecture
 
 * Dive into the Clojure implementation
 
@@ -40,7 +40,7 @@ Why did I do this?
   * And it also has the nice side effect of teaching me a little more about
     8-bits chips and games emulation.
 
-Chip-8 architecture (1)
+CHIP-8 architecture (1)
 -----------------------
 
 * 4k of memory (interpreter in the lower 512 bytes)
@@ -53,7 +53,7 @@ Chip-8 architecture (1)
 
 * 35 (2 byte) instructions
 
-Chip-8 architecture (2)
+CHIP-8 architecture (2)
 -----------------------
 
 * Monochrome 64 x 32 pixel display
@@ -148,7 +148,7 @@ Links
 
 * https://github.com/kristenjacobs/chip8-clj-slides
 
-* Chip8 details + roms (games and demos)
+* CHIP-8 details + roms (games and demos)
 
   * https://en.wikipedia.org/wiki/CHIP-8
 
