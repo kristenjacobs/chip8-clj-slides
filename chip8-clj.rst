@@ -5,12 +5,14 @@
 What's CHIP-8?
 --------------
 
-* 1970's 8-bit virtual machine targeted at games programming. 
+* 1970's 8-bit virtual machine/programming language targeted at games programming. 
   Originally implemented on kit-based 8-bit micros such as the mighty Telmac 1800
   (2000 units sold mostly in Sweden and Finland)
 
 .. image:: telmac-1800.jpeg
-   :height: 350px
+   :height: 300px
+
+* Revived in the late 80's due to an implementation on an HP48 graphing calculator 
 
 The plan
 --------
@@ -64,6 +66,8 @@ CHIP-8 architecture (2)
 
 * Hex input keyboard (0x0 - 0xF) 
 
+* Sprites for 0x0 - 0xF pre-baked into interpreter memory address space  
+
 Emulator development algorithnm
 -------------------------------
 
@@ -86,20 +90,22 @@ Fetch/decode/execute
 * Core fetch/decode/execute loop takes a machine state, 
   and returns an updated machine state.
 
-* *Code*
+* Files: *machine_state.clj*, *core.clj*, *instructions.clj*
 
-Threads and shared state
-------------------------
+Threads and shared/mutable state
+--------------------------------
 
-* 4 threads
+* 4 threads: *core*, *graphics*, *sound timer* and *delay timer*
 
-  * Core -- atom[] --> Graphics
+  * Core -- atom[]  --> Graphics (Screen updates to apply)
+  
+  * Core -- atom#{} --> Graphics (Keys currently pressed)
 
-  * Core -- atom 0 --> Sound timer
+  * Core -- atom 0  --> Sound timer (Current value)
 
-  * Core -- atom 0 --> Delay timer
+  * Core -- atom 0  --> Delay timer (Current value)
 
-* *Code*
+* Files: *main.clj*, *state.clj*
 
 Graphics
 --------
@@ -108,7 +114,9 @@ Graphics
 
 * All drawing done via single draw sprite instruction
 
-* *Code + Demo* 
+* Files: *graphics.clj* 
+  
+* *Demo* 
 
 Sound
 -----
@@ -120,7 +128,9 @@ Sound
 * Ended up playing wav files using a command line utility
   (paplay on Linux, afplay on OSX)
 
-* *Code + Demo*
+* Files: *timer.clj* 
+  
+* Demo*
 
 Testing
 -------
@@ -133,7 +143,8 @@ Testing
   (Nice because the state of the chip can be passed in via the memory state,
   and you can simply check that it has been updated in the expected way)
 
-* All other components tested manually by playing games
+* All other components tested manually by playing games (and looking at the 
+  instruction trace output).
 
 What's next?
 ------------
